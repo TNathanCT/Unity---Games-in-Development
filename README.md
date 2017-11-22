@@ -1,1 +1,1 @@
-# Unity---Games-in-Development
+Atomic is a 3D runner in 3rd person view developed using C# on the Unity Engine. There are four balls of electricity in a damaged wire, and you must rotate the spheres in order to avoid the non-conductive objects that are in the wire.
