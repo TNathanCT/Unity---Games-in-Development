@@ -1,0 +1,53 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+
+public class PointandClickMovement : MonoBehaviour {
+
+    private NavMeshAgent mNavMeshAgent;
+    public bool mRunning = false;
+    public Animator Anim;
+
+	void Start () {
+        mNavMeshAgent = GetComponent<NavMeshAgent>();
+        Anim = GetComponentInChildren<Animator>();
+        mRunning = false;
+	}
+	
+	// Update is called once per frame
+	void Update () {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Physics.Raycast(ray, out hit, 100))
+            {
+                mNavMeshAgent.destination = hit.point;
+          
+            }
+        }
+
+        if(mNavMeshAgent.remainingDistance <= mNavMeshAgent.stoppingDistance)
+        {
+            mRunning = false;
+        }
+        else
+        {
+            mRunning = true;
+        }
+       
+
+
+        if(mRunning == true)
+        {
+            Anim.SetBool("Punch", true);
+        }
+         if(mRunning == false)
+        {
+            Anim.SetBool("Punch", false);
+        }
+	}
+}
