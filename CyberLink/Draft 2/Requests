@@ -1,0 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Requests : MonoBehaviour {
+
+    [SerializeField]
+    public float CurrentAmount;
+    [SerializeField]
+    public float speed;
+
+    public GameObject Request1;
+
+
+	void Start () {
+        CurrentAmount = 100;
+        Request1.SetActive(false);	
+	}
+	
+	
+	void Update () {
+        if(CurrentAmount <= 100)
+        {
+            CurrentAmount -= speed * Time.deltaTime;
+        }
+        if (CurrentAmount < 0)
+        {
+            CurrentAmount = 0;
+        }
+
+
+        if(CurrentAmount <= 90)
+        {
+            Request1.SetActive(true);
+        }
+
+
+    }
+}
