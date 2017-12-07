@@ -2,8 +2,16 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class PlayerController : NetworkBehaviour {
+    
+    public GameObject bulletPrefab;
+    public Transform bulletSpawn;
+
 
 void Update(){
+
+    if(Input.GetKeyDown(KeyCode.Space)){
+         Fire()
+    }
     
     if(!isLocalPlayer){
         return;
@@ -17,9 +25,20 @@ void Update(){
     }
     
     public override void OnStartLocalPlayer(){
+        GetComponent<MeshRenderer>().material.color = Color.blue;
+    }
     
-    GetComponent<MeshRenderer>().material.color = Color.blue;
+    void Fire(){
+    var bullt = (GameObject) Instantiate(
+        bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+    bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
+    Destroy(bullet, 2.0f);
+    
     
     }
+    
+    
+    
+    
 }
     
