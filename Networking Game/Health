@@ -8,6 +8,8 @@ public class Health : NetworkBehaviour {
 
     public const int maxHealth = 100;
 
+    public bool destroyOnDeath;
+
     [SyncVar(hook = "OnChangeHealth")]//ensures that the health+damage systems are working under Server authority.
     public int currentHealth = maxHealth;
 
@@ -27,6 +29,15 @@ public class Health : NetworkBehaviour {
         if(currentHealth <= 0)
         {
             currentHealth = maxHealth;
+            RpcRespawn();
+        }
+
+        if (destroyOnDeath)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
             RpcRespawn();
         }
   }
