@@ -1,0 +1,40 @@
+using UnityEngine;
+using System.Collections;
+using UnityEngine.Networking;
+
+public class SetupLocalPlayer : NetworkBehaviour {
+
+    [SyncVar]
+    public string pname = "player";
+    public GameObject cameraplace;
+
+    void OnGUI()
+    {
+        if (isLocalPlayer)
+        {
+            Camera.main.transform.position = cameraplace.transform.position;
+            Camera.main.transform.rotation = cameraplace.transform.rotation;
+            pname = GUI.TextField(new Rect(25, Screen.height - 40, 100, 30), pname);
+            if (GUI.Button(new Rect(130, Screen.height - 40, 100, 30), "Change Name"))
+            {
+                CmdChangeName(pname);
+            }
+        }
+    }
+    
+    [Command]
+    public void CmdChangeName(string newName)
+    {
+        pname = newName;
+    }
+
+	void Start () {
+        if (isLocalPlayer)
+            GetComponent<drive>().enabled = true;
+    }
+    void Update()
+    {
+        this.GetComponentInChildren<TextMesh>().text = pname;
+    }
+}
+
