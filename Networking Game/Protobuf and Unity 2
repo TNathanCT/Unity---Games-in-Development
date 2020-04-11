@@ -1,9 +1,49 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using ProtoBuf;
+
 
 public class SaveAndLoadScript : MonoBehavior{
   public Persons myGroup;
+ public string filePath;
+  
+  void OnGUI(){
+        if(GUI.Button(new Rect(10,10,200,100), "Load file 1")){
+            if(string.isNullOrEmpty(filePath)){
+              Debug.Log("is Empty");
+              return;
+            }
+            
+            if(!File.Exists(filePath)){
+              Debug.Log("The File doesn't exist!");
+              return;
+            }
+            
+            myGroup = Serializer.Deserialize<Persons>(new FileStream(filePath, FileMode.Open, FileAccess.Read));
+            
+        }
+        
+        if(GUI.Button(new Rect(10,120,200,100), "Save File 1")){
+           if(string.isNullOrEmpty(filePath)){
+              Debug.Log("path is Empty");
+              return;
+            }
+            
+            if(myGroup == null){
+              Debug.Log("value is null!");
+              return;
+            }
+            
+           using (FileStream stream = new  FileStream(filePath, FileMode.Create, FileAccess.Write){
+                Serializer.Serialize<Persons>(stream, myGroup);
+                stream.Flush();
+           
+           }
+              
+        }
+  }
 
 
 
