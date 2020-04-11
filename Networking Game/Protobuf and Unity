@@ -1,0 +1,20 @@
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using ProtoBuf;
+
+[Serializable]
+public class Persons{
+  public string groupName;
+  public person[] groupMembers;
+  
+
+}
+
+
+
+public class Person{
+  public string name;
+  public int age;
+  
+}
