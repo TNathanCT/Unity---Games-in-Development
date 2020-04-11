@@ -2,10 +2,15 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using ProtoBuf;
+using System;
 
 [Serializable]
+[ProtoContract]
 public class Persons{
+
+  [ProtoMember(1)]
   public string groupName;
+  [ProtoMember(2)]
   public person[] groupMembers;
   
 
@@ -13,8 +18,11 @@ public class Persons{
 
 
 [Serializable]
+[ProtoContract]
 public class Person{
-  public string name;
-  public int age;
+    [ProtoMember(1)]
+    public string name;
+    [ProtoMember(2)]
+    public int age;
   
 }
