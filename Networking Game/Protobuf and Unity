@@ -12,7 +12,7 @@ public class Persons{
 }
 
 
-
+[Serializable]
 public class Person{
   public string name;
   public int age;
