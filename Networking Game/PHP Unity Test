@@ -1,0 +1,47 @@
+<?php
+
+//echo is essentially the print. The '.' is the concatenate
+echo "Hellp, today is " . date("Y-m-d H:i:s");
+//date is actually a function
+
+?>
+
+
+--------------------------------------------------------------------------------------------------------------
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Networking;
+
+public class Web : MonoBehaviour{
+
+  void Start(){
+    StartCoroutine(GetText());
+  }
+  
+  IEnumerator GetText(){
+  
+      using(UnityWebRequest www = UnityWebRequest.Get("http://www.my-server.com")){
+        yield return www.Send();
+        
+        if(ww.isNetworkError || www.isHttpError){
+            Debug.Log(www.error);
+        }
+        
+        else{
+            Debug.Log(www.downloadHandler.text)
+            byte[] results = www.downloadHandler.data;
+        }
+       
+       }
+  
+  
+  }
+  
+
+}
+
+
+
+
